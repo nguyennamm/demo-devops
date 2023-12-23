@@ -4,16 +4,16 @@ const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
+require("dotenv").config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
-  host: "localhost",
-  port: 3306,
-  user: "training",
-  password: "training_pw",
+  host: "db",
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PWD,
   database: "users",
   waitForConnections: true,
   connectionLimit: 10,
