@@ -18,6 +18,7 @@ pipeline {
                 MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
             }
             steps {
+                sh 'docker -v'
                 sh """
                     docker build nodejs/. -t demo-devops-nodejs-$ENV:latest \
                     --build-arg MYSQL_USER=$MYSQL_CREDS_USR \
