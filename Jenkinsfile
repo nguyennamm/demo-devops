@@ -47,8 +47,7 @@ pipeline {
                     docker-compose build \
                     --build-arg TAG=$TAG \
                     --build-arg MYSQL_USER=$MYSQL_CREDS_USR \
-                    --build-arg MYSQL_PWD=$MYSQL_CREDS_PSW \
-                    -f nodejs/Dockerfile
+                    --build-arg MYSQL_PWD=$MYSQL_CREDS_PSW
                     """
                 sh 'docker-compose up -d'
             }
