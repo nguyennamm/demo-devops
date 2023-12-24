@@ -47,7 +47,7 @@ pipeline {
                     sed -i '' 's/{tag}/$TAG/g' \
                     /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml
                 """
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
     }
