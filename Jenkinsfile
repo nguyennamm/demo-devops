@@ -36,14 +36,14 @@ pipeline {
         stage('Deploy') {
             agent {
                 node {
-                    label 'Target-Server'
+                    label 'Target-server-demo'
                 }
             }
             environment {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
-                sh "sed -i 's/{tag}/$TAG/g' /home/ubuntu/jenkins/multi-branch/devops-training-$ENV/docker-compose.yaml"
+                sh "sed -i 's/{tag}/$TAG/g' /Docker-demo-devops/docker-compose.yaml"
                 sh 'docker compose up -d'
             }
         }
