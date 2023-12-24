@@ -5,10 +5,10 @@ services:
     image: mysql:latest
     container_name: db
     environment:
-      MYSQL_ROOT_PASSWORD: training-2023
-      MYSQL_DATABASE: users
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PWD
+      - MYSQL_ROOT_PASSWORD=training-2023
+      - MYSQL_DATABASE=users
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PWD
     logging:
       driver: "json-file"
       options:
@@ -30,8 +30,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PWD
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PWD
     networks:
       - app-network
 
