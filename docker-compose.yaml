@@ -20,7 +20,7 @@ services:
       - app-network
 
   nodejs-app:
-    image: namnguyen96/demo-devops:{tag}
+    image: namnguyen96/demo-devops:${TAG}
     build:
       context: nodejs/.
       dockerfile: Dockerfile
