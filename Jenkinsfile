@@ -45,11 +45,11 @@ pipeline {
             }
             steps {
                 sh """
-                    docker-compose build \
-                    --build-arg TAG=$TAG \
-                    --build-arg MYSQL_USER=$MYSQL_CREDS_USR \
-                    --build-arg MYSQL_PWD=$MYSQL_CREDS_PSW
-                    """
+                    sed -e '' 's/{TAG}/$TAG/g' \
+                    -e '' 's/{MYSQL_USER}/$MYSQL_CREDS_USR/g' \
+                    -e '' 's/{MYSQL_PWD}/$MYSQL_PWD/g' \
+                    /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml
+                """
                 sh 'docker-compose up -d'
             }
         }

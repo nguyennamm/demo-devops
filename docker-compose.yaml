@@ -7,8 +7,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=training-2023
       - MYSQL_DATABASE=users
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_PASSWORD=$MYSQL_PWD
+      - MYSQL_USER={MYSQL_USER}
+      - MYSQL_PASSWORD={MYSQL_PWD}
     logging:
       driver: "json-file"
       options:
@@ -20,7 +20,7 @@ services:
       - app-network
 
   nodejs-app:
-    image: namnguyen96/demo-devops:${TAG}
+    image: namnguyen96/demo-devops:{TAG}
     build:
       context: nodejs/.
       dockerfile: Dockerfile
@@ -30,8 +30,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_PASSWORD=$MYSQL_PWD
+      - MYSQL_USER={MYSQL_USER}
+      - MYSQL_PASSWORD={MYSQL_PWD}
     networks:
       - app-network
 
