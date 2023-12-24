@@ -20,6 +20,7 @@ pipeline {
             steps {
                 sh """
                     docker build nodejs/. -t demo-devops-nodejs-$ENV:latest \
+                    -v /var/run/docker.sock:/var/run/docker.sock \
                     --build-arg MYSQL_USER=$MYSQL_CREDS_USR \
                     --build-arg MYSQL_PWD=$MYSQL_CREDS_PSW \
                     -f nodejs/Dockerfile
