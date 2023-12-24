@@ -44,7 +44,7 @@ pipeline {
             }
             steps {
                 sh """
-                    sed -i 's/{tag}/$TAG/g' \
+                    sed -i '' 's/{tag}/$TAG/g' \
                     /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml
                 """
                 sh 'docker compose up -d'
