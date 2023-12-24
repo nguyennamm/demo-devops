@@ -3,8 +3,6 @@ pipeline {
     environment {
         ENV = 'dev'
         NODE = 'Build-server-demo'
-        DOCKER_HUB_CREDS = credentials('jenkins-dockerhub-common-creds')
-        MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
     }
 
     stages {
@@ -16,6 +14,8 @@ pipeline {
             }
             environment {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
+                DOCKER_HUB_CREDS = credentials('jenkins-dockerhub-common-creds')
+                MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
             }
             steps {
                 sh """
@@ -41,6 +41,7 @@ pipeline {
             }
             environment {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
+                MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
             }
             steps {
                 sh """
