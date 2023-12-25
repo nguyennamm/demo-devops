@@ -3,6 +3,8 @@ pipeline {
     environment {
         ENV = 'dev'
         NODE = 'Build-server-demo'
+        DOCKER_HUB_CREDS = credentials('jenkins-dockerhub-common-creds')
+        MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
     }
 
     stages {
@@ -14,8 +16,6 @@ pipeline {
             }
             environment {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
-                DOCKER_HUB_CREDS = credentials('jenkins-dockerhub-common-creds')
-                MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
             }
             steps {
                 sh """
@@ -41,12 +41,13 @@ pipeline {
             }
             environment {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
-                MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
             }
             steps {
                 sh """
                     sed -i '' 's/{TAG}/$TAG/g' \
+                    /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml \
                     -i '' 's/{MYSQL_USER}/$MYSQL_CREDS_USR/g' \
+                    /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml \
                     -i '' 's/{MYSQL_PWD}/$MYSQL_CREDS_PSW/g' \
                     /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml
                 """
