@@ -2,7 +2,6 @@ pipeline {
     agent none
     environment {
         ENV = 'dev'
-        NODE = 'Build-server-demo'
         DOCKER_HUB_CREDS = credentials('jenkins-dockerhub-common-creds')
         MYSQL_CREDS = credentials('jenkins-mysql-demo-devops-creds')
     }
@@ -11,7 +10,7 @@ pipeline {
         stage('Build Image') {
             agent {
                 node {
-                    label "$NODE"
+                    label 'Build-server-demo'
                 }
             }
             environment {
