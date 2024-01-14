@@ -5,8 +5,8 @@ WORKDIR /usr/src/app
 ARG MYSQL_USER
 ENV MYSQL_USER=${MYSQL_USER}
 
-ARG MYSQL_PWD
-ENV MYSQL_PWD=${MYSQL_PWD}
+ARG MYSQL_PASSWORD
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
 # Install app dependencies
 # Copy both package.json AND package-lock.json to the working directory

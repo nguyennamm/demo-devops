@@ -8,7 +8,7 @@ services:
       - MYSQL_ROOT_PASSWORD=training-2023
       - MYSQL_DATABASE=users
       - MYSQL_USER={MYSQL_USER}
-      - MYSQL_PASSWORD={MYSQL_PWD}
+      - MYSQL_PASSWORD={MYSQL_PASSWORD}
     logging:
       driver: "json-file"
       options:
@@ -31,7 +31,7 @@ services:
       - "3000:3000"
     environment:
       - MYSQL_USER={MYSQL_USER}
-      - MYSQL_PASSWORD={MYSQL_PWD}
+      - MYSQL_PASSWORD={MYSQL_PASSWORD}
     networks:
       - app-network
 

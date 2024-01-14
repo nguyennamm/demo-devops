@@ -20,7 +20,7 @@ pipeline {
                 sh """
                     docker build nodejs/. -t demo-devops-nodejs-$ENV:latest \
                     --build-arg MYSQL_USER=$MYSQL_CREDS_USR \
-                    --build-arg MYSQL_PWD=$MYSQL_CREDS_PSW \
+                    --build-arg MYSQL_PASSWORD=$MYSQL_CREDS_PSW \
                     -f nodejs/Dockerfile
                     """
                 sh "docker login -u $DOCKER_HUB_CREDS_USR -p $DOCKER_HUB_CREDS_PSW"
