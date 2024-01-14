@@ -43,7 +43,7 @@ pipeline {
             }
             steps {
                 sh """
-                    sed -i '' -e 's/{TAG}/$TAG/g; s/{MYSQL_USER}/$MYSQL_CREDS_USR/g; s/{MYSQL_PWD}/$MYSQL_CREDS_PSW/g' \
+                    sed -i '' -e 's/{TAG}/$TAG/g; s/{MYSQL_USER}/$MYSQL_CREDS_USR/g; s/{MYSQL_PASSWORD}/$MYSQL_CREDS_PSW/g' \
                     /Users/namnguyen/jenkins-argent/workspace/Docker-demo-devops/docker-compose.yaml
                 """
                 sh 'docker-compose up -d'
