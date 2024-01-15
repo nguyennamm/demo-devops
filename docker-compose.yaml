@@ -21,6 +21,7 @@ services:
 
   nodejs-app:
     image: namnguyen96/demo-devops:{TAG}
+    restart: always
     build:
       context: nodejs/.
       dockerfile: Dockerfile
