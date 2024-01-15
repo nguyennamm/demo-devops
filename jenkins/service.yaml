@@ -1,7 +1,7 @@
 kind: Service
 metadata:
   name: jenkins-service
-  namespace: jenkins
+  namespace: nodejs-demo
 spec:
   ports:
     - port: 8080
