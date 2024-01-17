@@ -1,0 +1,48 @@
+pipeline {
+    agent none
+    environment {
+        ENV = 'dev'
+        DOCKER_HUB_CREDS = credentials('jenkins-dockerhub-common-creds')
+    }
+
+    stages {
+        stage('Build Image') {
+            agent {
+                node {
+                    label 'Build-server-demo'
+                }
+            }
+            environment {
+                TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
+            }
+            steps {
+                sh """
+                    sudo docker build ../nodejs/. -t demo-devops-nodejs-$ENV:latest \
+                    -f ../nodejs/Dockerfile
+                    """
+                sh "sudo docker login -u $DOCKER_HUB_CREDS_USR -p $DOCKER_HUB_CREDS_PSW"
+                // tag docker image
+                sh "sudo docker tag demo-devops-nodejs-$ENV:latest namnguyen96/demo-devops:$TAG"
+                //push docker image to docker hub
+                sh "sudo docker push namnguyen96/demo-devops:$TAG"
+                // remove docker image to reduce space on build server
+                sh "sudo docker rmi -f namnguyen96/demo-devops:$TAG"
+                sh "sudo docker rmi -f demo-devops-nodejs-$ENV:latest"
+            }
+        }
+        stage('Deploy') {
+            agent {
+                node {
+                    label 'Target-server-demo'
+                }
+            }
+            environment {
+                TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
+            }
+            steps {
+                sh "sudo sed -i 's/{TAG}/$TAG/g' nodejs/deployment.yaml"
+                sh 'sudo kubectl apply -f nodejs/deployment.yaml'
+            }
+        }
+    }
+}
