@@ -5,8 +5,7 @@ metadata:
   namespace: nodejs-demo
 spec:
   ports:
-    - name: nodejs-app
-      port: 80
-      targetPort: http
+    - port: 8000
+      targetPort: 8000
   selector:
     app: nodejs-app
