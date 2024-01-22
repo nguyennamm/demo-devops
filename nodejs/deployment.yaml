@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nodejs-app
-          image: namnguyen96/demo-devops:{TAG}
+          image: namnguyen96/demo-devops:{tag}
           command: ["nodejs", "app.js"]
           env:
             - name: MYSQL_USER
