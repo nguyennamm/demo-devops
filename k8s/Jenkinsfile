@@ -40,8 +40,9 @@ pipeline {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
-                sh "sudo sed -i 's/{TAG}/$TAG/g' /root/k8s/demo-devops/nodejs/deployment.yaml"
+                sh "sudo sed -i 's|namnguyen96/demo-devops:{tag}|namnguyen96/demo-devops:$TAG|' /root/k8s/demo-devops/nodejs/deployment.yaml"
                 sh 'sudo kubectl apply -f /root/k8s/demo-devops/nodejs/deployment.yaml'
+                sh 'kubectl rollout status deployment/nodejs-app -n nodejs-demo'
             }
         }
     }
