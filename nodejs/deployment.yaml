@@ -16,12 +16,6 @@ spec:
       containers:
         - name: nodejs-app
           image: namnguyen96/demo-devops:{tag}
-          command: ["nodejs", "app.js"]
-          resources:
-            requests:
-              ephemeral-storage: 1Gi
-            limits:
-              ephemeral-storage: 2Gi
           env:
             - name: MYSQL_USER
               valueFrom:
