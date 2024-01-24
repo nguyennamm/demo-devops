@@ -4,8 +4,10 @@ metadata:
   name: nodejs-app
   namespace: nodejs-demo
 spec:
+  type: NodePort
   ports:
     - port: 8000
       targetPort: 8000
+      nodePort: 32000
   selector:
     app: nodejs-app
