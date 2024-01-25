@@ -5,3 +5,4 @@ metadata:
   namespace: nodejs-demo
 data:
   user: training
+  db_name: users
