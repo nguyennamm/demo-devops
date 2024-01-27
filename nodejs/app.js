@@ -8,14 +8,13 @@ require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const dbName = process.env.MYSQL_DATABASE;
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
   host: "mysql",
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  database: dbName,
+  database: process.env.MYSQL_DATABASE,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -23,7 +22,7 @@ const pool = mysql.createPool({
 
 // Create users table if not exists
 pool.execute(`
-  CREATE TABLE IF NOT EXISTS ${dbName}.users (
+  CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,

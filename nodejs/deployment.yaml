@@ -17,6 +17,11 @@ spec:
         - name: nodejs-app
           image: namnguyen96/demo-devops:{tag}
           env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: db_name
             - name: MYSQL_USER
               valueFrom:
                 configMapKeyRef:
