@@ -69,6 +69,19 @@ app.get("/api/v1/ping", (req, res) => {
   res.status(200).json({ message: "pong" });
 });
 
+/**
+ * @swagger
+ * /api/v2/ping:
+ *   get:
+ *     summary: Health check endpoint
+ *     responses:
+ *       200:
+ *         description: Pong response
+ */
+app.get("/api/v2/ping", (req, res) => {
+  res.status(200).json({ message: "pong" });
+});
+
 // Get user by ID
 /**
  * @swagger
