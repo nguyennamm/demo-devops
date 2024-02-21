@@ -36,7 +36,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo kubectl apply -f nodejs/team_deployment.yaml'
+                sh 'kubectl apply -f nodejs/team_deployment.yaml'
                 sh "kubectl set image deployment/namng-nodejs-app-deployment namng-nodejs-app-deployment=namnguyen96/demo-devops:$TAG"
             }
         }
