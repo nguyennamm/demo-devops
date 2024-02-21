@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namng-nodejs-app-deployment
+  namespace: python-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: namng-nodejs-app-deployment
+  template:
+    metadata:
+      labels:
+        app: namng-nodejs-app-deployment
+    spec:
+      containers:
+        - name: namng-nodejs-app-deployment
+          image: namnguyen96/demo-devops:latest
+          imagePullPolicy: "Always"
+          env:
+            - name: MYSQL_DATABASE
+              value: users
+            - name: MYSQL_USER
+              value: training
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: namng-nodejs-app-service
+  namespace: python-demo
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: namng-nodejs-app-deployment
+---
