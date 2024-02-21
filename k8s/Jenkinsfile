@@ -9,7 +9,7 @@ pipeline {
         stage('Build Image') {
             agent {
                 node {
-                    label 'Build-server-demo'
+                    label 'Build-server-demo || worker-node-3'
                 }
             }
             environment {
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 node {
-                    label 'Target-server-demo'
+                    label 'Target-server-demo || worker-node-3'
                 }
             }
             environment {
