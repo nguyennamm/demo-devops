@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'worker-node-3' }
+    agent none
     environment {
         ENV = 'dev'
         BUILD_NODE = 'worker-node-3'
@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 sh 'kubectl apply -f nodejs/team_deployment.yaml'
-                sh "kubectl set image deployment/namng-nodejs-app-deployment namng-nodejs-app-deployment=namnguyen96/demo-devops:$TAG"
+                sh "kubectl set image deployment/namng-nodejs-app-deployment namng-nodejs-app-deployment=namnguyen96/demo-devops:$TAG -n python-demo"
             }
         }
     }
