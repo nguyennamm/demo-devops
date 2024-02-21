@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 sh """
-                    sudo docker build /nodejs/. -t demo-devops-nodejs-$ENV:latest \
+                    sudo docker build nodejs/. -t demo-devops-nodejs-$ENV:latest \
                     -f nodejs/Dockerfile
                     """
                 sh "sudo docker login -u $DOCKER_HUB_CREDS_USR -p $DOCKER_HUB_CREDS_PSW"
