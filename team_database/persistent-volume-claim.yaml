@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: api-mysql-claim
-namespace: python-demo
+  namespace: python-demo
 spec:
   volumeName: api-mysql
   accessModes:
