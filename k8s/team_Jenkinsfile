@@ -4,7 +4,6 @@ pipeline {
         ENV = 'dev'
         BUILD_NODE = 'worker-node-3'
         DOCKER_HUB_CREDS = credentials('namng-dockerhub-common-creds')
-        TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
     }
 
     stages {
@@ -13,6 +12,9 @@ pipeline {
                 node {
                     label "$BUILD_NODE"
                 }
+            }
+            environment {
+                TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
                 sh """
@@ -34,6 +36,9 @@ pipeline {
                 node {
                     label "$BUILD_NODE"
                 }
+            }
+            environment {
+                TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
                 sh 'kubectl apply -f nodejs/team_deployment.yaml'
