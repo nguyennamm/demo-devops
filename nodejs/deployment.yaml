@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: nodejs-app
-          image: namnguyen96/demo-devops:{tag}
+          image: namnguyen96/demo-devops:latest
+          imagePullPolicy: "Always"
           env:
             - name: MYSQL_DATABASE
               valueFrom:
@@ -32,5 +33,3 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: mysql-password
-          ports:
-            - containerPort: 8000

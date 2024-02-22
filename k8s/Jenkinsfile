@@ -9,7 +9,7 @@ pipeline {
         stage('Build Image') {
             agent {
                 node {
-                    label 'Build-server-demo || worker-node-3'
+                    label 'Build-server-demo'
                 }
             }
             environment {
@@ -33,15 +33,15 @@ pipeline {
         stage('Deploy') {
             agent {
                 node {
-                    label 'Target-server-demo || worker-node-3'
+                    label 'Target-server-demo'
                 }
             }
             environment {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
-                sh "sudo sed -i 's/{tag}/$TAG/g' nodejs/deployment.yaml"
-                sh 'sudo kubectl apply -f nodejs/deployment.yaml'
+                sh 'kubectl apply -f nodejs/deployment.yaml'
+                sh "kubectl set image deployment/nodejs-app nodejs-app=namnguyen96/demo-devops:$TAG -n nodejs-demo"
             }
         }
     }

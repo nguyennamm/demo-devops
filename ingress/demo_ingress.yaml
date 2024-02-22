@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: training-nodejs-ingress
+  namespace: nodejs-demo
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: "nodejs.devops4all.co"
+    http:
+      paths:
+      - backend:
+          service:
+            name: nodejs-app
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
