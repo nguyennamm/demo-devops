@@ -4,6 +4,7 @@ pipeline {
         ENV = 'dev'
         BUILD_NODE = 'worker-node-3'
         DOCKER_HUB_CREDS = credentials('namng-dockerhub-common-creds')
+        TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
     }
 
     stages {
@@ -12,9 +13,6 @@ pipeline {
                 node {
                     label "$BUILD_NODE"
                 }
-            }
-            environment {
-                TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
                 sh """
@@ -37,12 +35,26 @@ pipeline {
                     label "$BUILD_NODE"
                 }
             }
-            environment {
-                TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
-            }
             steps {
                 sh 'kubectl apply -f nodejs/team_deployment.yaml'
                 sh "kubectl set image deployment/namng-nodejs-app-deployment namng-nodejs-app-deployment=namnguyen96/demo-devops:$TAG -n python-demo"
+            }
+        }
+        stage('Ingress') {
+            agent {
+                node {
+                    label "$BUILD_NODE"
+                }
+            }
+            steps {
+                script {
+                    try {
+                        sh 'kubectl delete -f /home/team1_devops/devops-k8s/ingress/cilium'
+                        sh 'kubectl apply -f /home/team1_devops/devops-k8s/ingress/cilium/namng-nodejs-ingress.yaml'
+                    } catch (err) {
+                        sh 'kubectl apply -f /home/team1_devops/devops-k8s/ingress/cilium/namng-nodejs-ingress.yaml'
+                    }
+                }
             }
         }
     }
