@@ -35,8 +35,8 @@ metadata:
   namespace: python-demo
 spec:
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 3003
+      targetPort: 3003
   selector:
     app: namng-nodejs-app-deployment
 ---
