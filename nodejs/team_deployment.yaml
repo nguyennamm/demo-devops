@@ -18,6 +18,8 @@ spec:
           image: namnguyen96/demo-devops:latest
           imagePullPolicy: "Always"
           env:
+            - name: PORT
+              value: 3003
             - name: MYSQL_DATABASE
               value: users
             - name: MYSQL_USER
