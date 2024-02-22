@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: "Always"
           env:
             - name: PORT
-              value: 3003
+              value: "3003"
             - name: MYSQL_DATABASE
               value: users
             - name: MYSQL_USER
