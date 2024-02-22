@@ -40,8 +40,8 @@ pipeline {
                 TAG = sh(returnStdout: true, script: 'git rev-parse -short=10 HEAD | tail -n +2').trim()
             }
             steps {
-                sh 'kubectl apply -f nodejs/deployment.yaml'
-                sh "kubectl set image deployment/nodejs-app nodejs-app=namnguyen96/demo-devops:$TAG -n nodejs-demo"
+                sh 'sudo kubectl apply -f nodejs/deployment.yaml'
+                sh "sudo kubectl set image deployment/nodejs-app nodejs-app=namnguyen96/demo-devops:$TAG -n nodejs-demo"
             }
         }
     }
