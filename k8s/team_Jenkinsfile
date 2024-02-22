@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh """
                     sudo docker build nodejs/. -t demo-devops-nodejs-$ENV:latest \
-                    -f nodejs/Dockerfile
+                    -f nodejs/team_Dockerfile
                     """
                 sh "sudo docker login -u $DOCKER_HUB_CREDS_USR -p $DOCKER_HUB_CREDS_PSW"
                 // tag docker image
