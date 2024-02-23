@@ -71,14 +71,14 @@ app.get("/api/v1/ping", (req, res) => {
 
 /**
  * @swagger
- * /api/v2/ping:
+ * /api/v5/ping:
  *   get:
  *     summary: Health check endpoint
  *     responses:
  *       200:
  *         description: Pong response
  */
-app.get("/api/v2/ping", (req, res) => {
+app.get("/api/v5/ping", (req, res) => {
   res.status(200).json({ message: "pong" });
 });
 
